@@ -1,5 +1,5 @@
 <script setup>
-import { Link, router } from '@inertiajs/vue3'
+import { Link, router , Head } from '@inertiajs/vue3'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 
  
@@ -18,6 +18,7 @@ const deletePortfolio = (id) => {
 
  
 <template>
+  <Head title="ListPortfolio" />
 <AuthenticatedLayout>
   <div class="p-8 bg-gray-50 min-h-screen">
  
@@ -81,8 +82,8 @@ const deletePortfolio = (id) => {
  
           <!-- Actions -->
           <div class="mt-4 flex justify-between items-center">
- 
-            <Link
+            
+            <Link v-if="auth && auth.user.id==p.user_id"
               :href="`/portfolios/${p.id}/edit`"
               class="text-indigo-600 hover:underline text-sm"
             >

@@ -27,10 +27,24 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::get('/home', function(){ return Inertia::render('Home');})->name('home');
+Route::get('/home', function(){ return Inertia::render('Home');})->middleware('auth')->name('home');
 
 Route::get('/portfolios', [PortfolioController::class , 'index'])->name('portfolios.index');
 Route::get('/portfolios/create', [PortfolioController::class , 'create']);
 Route::post('/portfolios', [PortfolioController::class , 'store']);
+
+Route::delete('/portfolios/{portfolio}',[PortfolioController::class,'destroy'])->middleware('auth')->name('portfolios.destroy');
+
+
+Route::get('/portfolios/{portfolio}/edit',[PortfolioController::class,'edit'])->middleware('auth')->name('portfolios.edit');
+
+
+Route::put('/portfolios/{portfolio}',[PortfolioController::class,'update'])->name('portfolios.update');
+
+
+
+
+
+
 
 require __DIR__.'/auth.php';
